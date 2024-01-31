@@ -4,11 +4,13 @@ import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 import iconClose from '../img/bi_x-octagon.png';
 
-const btnStart = document.querySelector('input.input-field');
+const btnStart = document.querySelector('.start-btn');
 const dataDay = document.querySelector('span[data-days]');
 const dataHours = document.querySelector('span[data-hours]');
 const dataMinutes = document.querySelector('span[data-minutes]');
 const dataSeconds = document.querySelector('span[data-seconds]');
+
+btnStart.disabled = true;
 
 let userSelectedDate;
 let difference;
@@ -85,16 +87,6 @@ function onStart() {
 
 flatpickr('#datetime-picker', options);
 
-btnStart.addEventListener('click', e => {
-  btnStart.disabled = true;
-  input.disabled = true;
-  btnStart.style.background = '#CFCFCF';
-  btnStart.style.color = '#989898';
-  difference = userSelectedDate - Date.now();
-  timerNumber(convertMs(difference));
-  setIntervalId = setInterval(() => {
-    difference -= 1000;
-    timerNumber(convertMs(difference));
-    stopTimer(difference);
-  }, 1000);
+btnStart.addEventListener('click', () => {
+  onStart();
 });
