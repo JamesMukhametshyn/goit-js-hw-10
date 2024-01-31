@@ -85,6 +85,16 @@ function onStart() {
 
 flatpickr('#datetime-picker', options);
 
-btnStart.addEventListener('click', () => {
-  onStart();
+btnStart.addEventListener('click', e => {
+  btnStart.disabled = true;
+  input.disabled = true;
+  btnStart.style.background = '#CFCFCF';
+  btnStart.style.color = '#989898';
+  difference = userSelectedDate - Date.now();
+  timerNumber(convertMs(difference));
+  setIntervalId = setInterval(() => {
+    difference -= 1000;
+    timerNumber(convertMs(difference));
+    stopTimer(difference);
+  }, 1000);
 });
